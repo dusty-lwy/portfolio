@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>返场投票 · 票数监控台</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0f13'/%3E%3Cg fill='%23d9a441'%3E%3Crect x='7' y='17' width='4' height='8' rx='1'/%3E%3Crect x='14' y='12' width='4' height='13' rx='1'/%3E%3Crect x='21' y='7' width='4' height='18' rx='1'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0d0f13; --bg2:#131820; --panel:#171c25; --panel2:#1d232e;
+  --line:#262d39; --line2:#333c4a;
+  --text:#e7eaee; --muted:#8b94a3; --muted2:#6a7382;
+  --gold:#d9a441; --gold-d:#a87c26;
+  --teal:#3fa89b; --dim:#4d5666; --warn:#c8564a;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;font-size:14px;line-height:1.6;
+  background-image:radial-gradient(900px 420px at 12% -8%,rgba(217,164,65,.07),transparent 62%),
+                   radial-gradient(760px 380px at 96% 4%,rgba(63,168,155,.055),transparent 60%);
+  background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px 72px}
+
+header.top{border-bottom:1px solid var(--line);background:rgba(13,15,19,.86);backdrop-filter:blur(10px);position:sticky;top:0;z-index:30}
+.top-in{max-width:1120px;margin:0 auto;padding:14px 16px 0}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand h1{font-size:17px;font-weight:900;letter-spacing:.01em}
+.brand .sub{font-size:12px;color:var(--muted2);letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono)}
+.tabs{display:flex;gap:2px;margin-top:12px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;color:var(--muted);font-family:var(--sans);font-size:13.5px;
+  font-weight:500;padding:9px 14px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--text)}
+.tab[aria-current="page"]{color:var(--text);border-bottom-color:var(--gold);font-weight:700}
+
+.banner{margin:16px 0 0;padding:11px 14px;border:1px solid var(--line2);border-left:3px solid var(--warn);
+  border-radius:3px;background:var(--panel);font-size:12.5px;color:#c9cfd8;line-height:1.7}
+.banner b{color:var(--warn)}
+.banner code{font-family:var(--mono);background:#0b0d11;padding:1px 5px;border-radius:2px;color:var(--gold);font-size:11.5px}
+.banner.ok{border-left-color:var(--teal)}
+.banner.ok b{color:var(--teal)}
+.view{display:none}
+.view.on{display:block}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:26px 0 10px;flex-wrap:wrap}
+.sec-head h2{font-size:14px;font-weight:700;letter-spacing:.02em}
+.sec-head .hint{font-size:12px;color:var(--muted2)}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:13px 14px;min-width:0}
+.kpi .lbl{font-size:12px;color:var(--muted2);letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .val{font-family:var(--mono);font-size:21px;font-weight:700;margin-top:5px;letter-spacing:-.03em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .val.gold{color:var(--gold)}
+.kpi .foot{font-size:12px;color:var(--muted2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.tablewrap{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel)}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{padding:9px 10px;text-align:left;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+thead th{background:var(--bg2);color:var(--muted2);font-weight:500;font-size:12px;letter-spacing:.06em;
+  border-bottom:1px solid var(--line);position:sticky;top:0}
+tbody tr{border-bottom:1px solid rgba(38,45,57,.6)}
+tbody tr:last-child{border-bottom:0}
+tbody tr.in3{background:linear-gradient(90deg,rgba(217,164,65,.09),transparent 46%)}
+tbody tr.in6{background:linear-gradient(90deg,rgba(63,168,155,.075),transparent 46%)}
+.rk{font-family:var(--mono);font-weight:700;font-size:14px}
+.rk.r1{color:var(--gold)}.rk.r2{color:var(--gold)}.rk.r3{color:var(--gold)}
+.rk.r46{color:var(--teal)}
+.rk.rout{color:var(--muted2);font-weight:500}
+.hero{font-weight:500}
+.skin{color:var(--muted);font-size:12px;display:block;overflow:hidden;text-overflow:ellipsis}
+.votes{text-align:right;font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+.gap{text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted2)}
+.gap.up{color:var(--gold)}
+.cutoff td{border-top:1px dashed var(--line2);background:rgba(217,164,65,.05)}
+.cutoff .lbl{font-size:12px;color:var(--gold);letter-spacing:.08em;font-weight:700}
+
+.chart{width:100%;height:460px;background:var(--panel);border:1px solid var(--line);border-radius:4px}
+.chart.sm{height:380px}
+.empty{padding:34px 20px;text-align:center;color:var(--muted2);font-size:13px;
+  border:1px dashed var(--line2);border-radius:4px;background:rgba(23,28,37,.5);line-height:1.9}
+.empty b{color:var(--text);display:block;font-size:14px;margin-bottom:4px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:16px}
+.card h3{font-size:13px;font-weight:700;margin-bottom:3px}
+.card .desc{font-size:12px;color:var(--muted2);line-height:1.75;margin-bottom:13px}
+.stat-grid{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:12.5px}
+.stat-grid .k{color:var(--muted2);white-space:nowrap;font-family:var(--mono)}
+.stat-grid .v{color:var(--text);word-break:break-all;font-family:var(--mono)}
+.stat-grid .v.good{color:var(--teal)}
+.stat-grid .v.bad{color:var(--warn)}
+.hr{height:1px;background:var(--line);margin:16px 0}
+.snap-list{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:3px}
+.snap{display:flex;justify-content:space-between;gap:10px;padding:8px 11px;font-size:12px;
+  border-bottom:1px solid rgba(38,45,57,.6);font-family:var(--mono)}
+.snap:last-child{border-bottom:0}
+.snap .src{color:var(--muted2);font-family:var(--sans);font-size:12px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+button.btn{appearance:none;border:1px solid var(--line2);background:var(--panel2);color:var(--text);
+  font-family:var(--sans);font-size:12.5px;font-weight:500;padding:9px 15px;border-radius:3px;cursor:pointer;transition:.15s}
+button.btn:hover{border-color:var(--muted);background:#232a36}
+button.btn.primary{background:var(--gold);border-color:var(--gold);color:#141008;font-weight:700}
+button.btn.primary:hover{background:#e5b355;border-color:#e5b355}
+button.btn:disabled{opacity:.45;cursor:not-allowed}
+.statusbar{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted2);margin-top:18px;
+  padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono)}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted2);margin-right:5px;vertical-align:1px}
+.dot.on{background:var(--teal);box-shadow:0 0 0 3px rgba(63,168,155,.16)}
+.dot.off{background:var(--warn);box-shadow:0 0 0 3px rgba(200,86,74,.16)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:#222937;color:var(--text);
+  border:1px solid var(--line2);padding:10px 17px;border-radius:3px;font-size:12.5px;opacity:0;
+  pointer-events:none;transition:.22s;z-index:60;max-width:86vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:860px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+  .chart{height:560px}
+  .chart.sm{height:420px}
+  .brand h1{font-size:15.5px}
+  body{font-size:14px}
+  th,td{padding:9px 8px;font-size:13px}
+  .tab{min-height:44px;display:inline-flex;align-items:center;padding-top:0;padding-bottom:0}
+  button.btn{min-height:44px;padding:11px 16px;font-size:13px}
+}
+@media(max-width:520px){
+  .chart{height:640px}
+  .kpi{padding:12px}
+  .kpi .val{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <h1>返场投票 · 票数监控台</h1>
+      <span class="sub">HOK Anniversary Vote Tracker</span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab" data-view="rank">排行榜</button>
+      <button class="tab" data-view="chart">票数图表</button>
+      <button class="tab" data-view="status">数据状态</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="banner" id="banner" style="display:none"></div>
+
+  <!-- ================= 视图：排行榜 ================= -->
+  <section class="view" id="view-rank">
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">参选皮肤</div><div class="val" id="k-count">—</div><div class="foot">当期候选池</div></div>
+      <div class="kpi"><div class="lbl">第一名</div><div class="val gold" id="k-top">—</div><div class="foot" id="k-top-name">—</div></div>
+      <div class="kpi"><div class="lbl">返场线门槛（第 3 名）</div><div class="val" id="k-cut">—</div><div class="foot">前 3 名直售返场</div></div>
+      <div class="kpi"><div class="lbl">累计票数</div><div class="val" id="k-sum">—</div><div class="foot" id="k-time">尚未抓取</div></div>
+    </div>
+
+    <div class="sec-head">
+      <h2>实时票数排名</h2>
+      <span class="hint" id="rank-hint">按票数降序</span>
+    </div>
+
+    <div id="rank-empty" class="empty">
+      <b>还没有数据</b>
+      数据由 GitHub Actions 自动抓取，每 10 分钟更新一次；若一直为空，说明本期活动参数尚未配置（见「数据状态」页说明）。
+    </div>
+
+    <div class="tablewrap" id="rank-tablewrap" style="display:none">
+      <table>
+        <colgroup>
+          <col style="width:48px"><col><col style="width:30%"><col style="width:26%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>名次</th><th>英雄 / 皮肤</th><th style="text-align:right">票数</th><th style="text-align:right">与上名差</th>
+          </tr>
+        </thead>
+        <tbody id="rank-body"></tbody>
+      </table>
+    </div>
+
+    <div class="statusbar" id="statusbar-rank"></div>
+  </section>
+
+  <!-- ================= 视图：图表 ================= -->
+  <section class="view" id="view-chart">
+    <div class="sec-head">
+      <h2>票数对比</h2>
+      <span class="hint">金色为前 3 名（直售返场），青色为第 4–6 名（奇幻商店返场）</span>
+    </div>
+    <div id="chart-bar-empty" class="empty"><b>还没有数据</b>抓到数据后这里会显示各皮肤票数对比。</div>
+    <div class="chart" id="chart-bar" style="display:none"></div>
+
+    <div class="sec-head">
+      <h2>票数随时间变化</h2>
+      <span class="hint" id="trend-hint">每次抓取存一条快照，按快照时间连成趋势</span>
+    </div>
+    <div id="chart-trend-empty" class="empty"><b>还没有趋势</b>至少抓到两次数据后，这里会画出票数增长曲线。</div>
+    <div class="chart sm" id="chart-trend" style="display:none"></div>
+  </section>
+
+  <!-- ================= 视图：数据状态 ================= -->
+  <section class="view" id="view-status">
+    <div class="grid2">
+
+      <div class="card">
+        <h3>抓取状态</h3>
+        <p class="desc">GitHub Actions 定时运行抓取器，把结果写到本仓库的 data/ 目录；本页面直接读取这些 JSON 渲染。每次打开都是最新数据，电脑不用开着。</p>
+        <div class="stat-grid" id="stat-grid">
+          <span class="k">运行状态</span><span class="v" id="s-ok">—</span>
+          <span class="k">最近抓取</span><span class="v" id="s-run">—</span>
+          <span class="k">数据时间</span><span class="v" id="s-data">—</span>
+          <span class="k">说明</span><span class="v" id="s-msg">—</span>
+        </div>
+        <div class="btnrow">
+          <button class="btn primary" id="btn-refresh">立即刷新</button>
+          <button class="btn" id="btn-auto">自动刷新：开</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>为什么还没有数据</h3>
+        <p class="desc">
+          王者荣耀的返场投票是<b>游戏内活动</b>，官方没有公开的免登录票数网页。程序按
+          <code>数据源配置.json</code> 里的 <b class="num">iActivityId</b> / <b class="num">iFlowId</b> /
+          <b class="num">g_tk</b> 去活动接口抓取，这三个参数每期都变，需要抓包拿到后填进仓库里的配置文件（见仓库 README 的抓包教程）。
+        </p>
+        <p class="desc">
+          没有参数时的兜底办法：在本地跑 <code>python fetcher.py --import "英雄 皮肤 票数"</code>
+          导入一条快照，再把 data/ 目录提交上来，看板立即能显示。
+        </p>
+        <div class="hr"></div>
+        <h3>历史快照</h3>
+        <p class="desc">每次抓取存一条，用于趋势图与回溯，最多保留 500 条。</p>
+        <div class="snap-list" id="snap-list"><div class="snap"><span class="src">暂无快照</span></div></div>
+      </div>
+
+    </div>
+    <div class="statusbar" id="statusbar-st"></div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var COLOR = {
+    gold: '#d9a441', gold2: '#e6bd6e', gold3: '#b4872f',
+    teal: '#3fa89b', teal2: '#5cc4b6', teal3: '#2c8377',
+    dim: '#4d5666', text: '#e7eaee', muted: '#8b94a3', muted2: '#6a7382',
+    line: '#262d39', bg: '#0d0f13', panel: '#171c25'
+  };
+
+  var DATA = { latest: null, history: [], status: null };
+  var barChart = null, trendChart = null, autoTimer = null, autoOn = true;
+
+  /* ---------------- 基础工具 ---------------- */
+  var fmt = function (n) {
+    if (n === null || n === undefined || n === '') return '—';
+    return Number(n).toLocaleString('en-US');
+  };
+  var wan = function (n) {
+    n = Number(n) || 0;
+    var sep = function (s) { return s.replace(/(\d)(?=(\d{3})+\.)/g, '$1,'); };
+    if (n >= 100000000) return sep((n / 100000000).toFixed(2)) + ' 亿';
+    if (n >= 10000) return sep((n / 10000).toFixed(1)) + ' 万';
+    return String(n);
+  };
+  var keyOf = function (it) { return it.k || (it.hero + '|' + it.skin); };
+  var esc = function (s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  };
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('on'); }, 2200);
+  }
+
+  function fetchJSON(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  /* ---------------- ECharts 懒加载（国内 CDN + 海外兜底） ---------------- */
+  function loadECharts() {
+    return new Promise(function (resolve, reject) {
+      if (window.echarts) return resolve(window.echarts);
+      var urls = [
+        'https://cdn.staticfile.net/echarts/5.5.1/echarts.min.js',
+        'https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js'
+      ];
+      (function tryNext(i) {
+        if (i >= urls.length) return reject(new Error('ECharts 加载失败（网络问题）'));
+        var s = document.createElement('script');
+        s.src = urls[i];
+        s.onload = function () { window.echarts ? resolve(window.echarts) : tryNext(i + 1); };
+        s.onerror = function () { tryNext(i + 1); };
+        document.head.appendChild(s);
+      })(0);
+    });
+  }
+
+  /* ---------------- 视图路由 ---------------- */
+  var VIEWS = ['rank', 'chart', 'status'];
+  function showView(name) {
+    if (VIEWS.indexOf(name) < 0) name = 'rank';
+    VIEWS.forEach(function (v) {
+      $('view-' + v).classList.toggle('on', v === name);
+    });
+    document.querySelectorAll('.tab').forEach(function (b) {
+      b.setAttribute('aria-current', b.dataset.view === name ? 'page' : 'false');
+    });
+    if (name === 'chart') { renderBar(); renderTrend(); }
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('.tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      location.hash = b.dataset.view;
+      showView(b.dataset.view);
+    });
+  });
+  window.addEventListener('hashchange', function () {
+    showView((location.hash || '#rank').slice(1));
+  });
+
+  /* ---------------- 数据加载 ---------------- */
+  function items() { return (DATA.latest && DATA.latest.items) || []; }
+
+  function apply() {
+    renderKpis(); renderTable(); renderSnaps(); renderStatus(); renderBanner();
+    if ($('view-chart').classList.contains('on')) { renderBar(); renderTrend(); }
+  }
+
+  function loadAll() {
+    return Promise.all([
+      fetchJSON('data/latest.json').catch(function () { return null; }),
+      fetchJSON('data/history.json').catch(function () { return null; }),
+      fetchJSON('data/status.json').catch(function () { return null; })
+    ]).then(function (res) {
+      var loadErr = res.every(function (x) { return x === null; });
+      DATA.latest = res[0] || DATA.latest;
+      DATA.history = res[1] || DATA.history;
+      DATA.status = res[2] || DATA.status;
+      DATA.loadErr = loadErr;
+      apply();
+    });
+  }
+
+  /* ---------------- 渲染：KPI ---------------- */
+  function renderKpis() {
+    var its = items();
+    $('k-count').textContent = its.length ? its.length : '—';
+    var total = its.reduce(function (a, b) { return a + (Number(b.votes) || 0); }, 0);
+    $('k-sum').textContent = its.length ? wan(total) : '—';
+    if (its.length) {
+      $('k-top').textContent = wan(its[0].votes);
+      $('k-top-name').textContent = its[0].hero + ' · ' + (its[0].skin || '');
+      var third = its[2] || its[its.length - 1];
+      $('k-cut').textContent = wan(third.votes);
+      $('k-time').textContent = '更新于 ' + (DATA.latest.ts || '—');
+    } else {
+      $('k-top').textContent = '—'; $('k-top-name').textContent = '—';
+      $('k-cut').textContent = '—'; $('k-time').textContent = '尚未抓取';
+    }
+  }
+
+  /* ---------------- 渲染：排行榜 ---------------- */
+  function renderTable() {
+    var its = items();
+    var wrap = $('rank-tablewrap'), empty = $('rank-empty');
+    if (!its.length) { wrap.style.display = 'none'; empty.style.display = ''; return; }
+    wrap.style.display = ''; empty.style.display = 'none';
+
+    var html = '';
+    its.forEach(function (it, i) {
+      var rank = i + 1;
+      var rk = rank <= 3 ? 'r' + rank : (rank <= 6 ? 'r46' : 'rout');
+      var prev = its[i - 1];
+      var gap = prev ? (Number(prev.votes) - Number(it.votes)) : null;
+      html += '<tr class="' + (rank <= 3 ? 'in3' : (rank <= 6 ? 'in6' : '')) + '">'
+        + '<td><span class="rk ' + rk + '">' + rank + '</span></td>'
+        + '<td><div class="hero">' + esc(it.hero) + '</div>'
+        + (it.skin ? '<span class="skin">' + esc(it.skin) + '</span>' : '') + '</td>'
+        + '<td class="votes">' + fmt(it.votes) + '</td>'
+        + '<td class="gap' + (rank === 1 ? '' : ' up') + '">' + (gap === null ? '—' : '−' + fmt(gap)) + '</td>'
+        + '</tr>';
+      if (rank === 3) {
+        html += '<tr class="cutoff"><td colspan="4"><span class="lbl">返 场 线</span>'
+          + '　第 1–3 名在 10.24–10.30 直售返场；第 4–6 名进入奇幻商店返场</td></tr>';
+      }
+    });
+    $('rank-body').innerHTML = html;
+    $('rank-hint').textContent = '按票数降序 · 共 ' + its.length + ' 项';
+  }
+
+  /* ---------------- 渲染：状态条与横幅 ---------------- */
+  function renderStatus() {
+    var st = DATA.status || {};
+    var dot = '<span class="dot ' + (st.last_ok ? 'on' : 'off') + '"></span>';
+    var parts = [
+      [dot, '数据 ' + (st.last_ok ? '正常' : (st.last_ok === undefined ? '等待中' : '异常'))],
+      ['', '最近抓取 ' + (st.updated_at || '—')],
+      ['', '数据时间 ' + ((st.data_ts || (DATA.latest && DATA.latest.ts)) || '—')],
+      ['', '说明：' + (st.last_msg || '—').slice(0, 90)]
+    ];
+    $('statusbar-rank').innerHTML = parts.map(function (p) {
+      return '<span>' + p[0] + esc(p[1]) + '</span>';
+    }).join('');
+    $('statusbar-st').innerHTML = $('statusbar-rank').innerHTML;
+
+    $('s-ok').textContent = st.last_ok === undefined ? '等待首次运行' : (st.last_ok ? '正常' : '异常');
+    $('s-ok').className = 'v ' + (st.last_ok ? 'good' : 'bad');
+    $('s-run').textContent = st.updated_at || '—';
+    $('s-data').textContent = (st.data_ts || (DATA.latest && DATA.latest.ts)) || '—';
+    $('s-msg').textContent = st.last_msg || '—';
+  }
+
+  function renderBanner() {
+    var b = $('banner');
+    if (DATA.loadErr) {
+      b.className = 'banner';
+      b.style.display = '';
+      b.innerHTML = '<b>读不到数据文件</b>　请通过在线地址打开本页（GitHub Pages），或在本地运行 <code>python -m http.server 8787</code> 后访问 <code>http://127.0.0.1:8787</code>。直接用 file:// 打开浏览器会拦截数据请求。';
+      return;
+    }
+    var st = DATA.status || {};
+    if (st.last_ok === false) {
+      b.className = 'banner';
+      b.style.display = '';
+      b.innerHTML = '<b>数据尚未更新</b>　' + esc(st.last_msg || '抓取器还没跑出结果。');
+      return;
+    }
+    b.style.display = 'none';
+  }
+
+  /* ---------------- 渲染：柱状图 ---------------- */
+  function renderBar() {
+    var its = items();
+    var el = $('chart-bar'), empty = $('chart-bar-empty');
+    if (!its.length) { el.style.display = 'none'; empty.style.display = ''; return; }
+    empty.style.display = 'none'; el.style.display = '';
+    el.style.height = Math.max(360, its.length * 30 + 96) + 'px';
+    loadECharts().then(function () {
+      if (!barChart) barChart = echarts.init(el, null, { renderer: 'canvas' });
+      var sorted = its.slice().sort(function (a, b) { return b.votes - a.votes; });
+      var names = sorted.map(function (it, i) {
+        return (i + 1) + '. ' + it.hero + (it.skin ? ' · ' + it.skin : '');
+      });
+      var data = sorted.map(function (it, i) {
+        var c = i < 3 ? COLOR.gold : (i < 6 ? COLOR.teal : COLOR.dim);
+        return { value: Number(it.votes) || 0, itemStyle: { color: c, borderRadius: [0, 2, 2, 0] } };
+      });
+      barChart.setOption({
+        backgroundColor: 'transparent',
+        grid: { left: 4, right: 78, top: 10, bottom: 26, containLabel: true },
+        tooltip: {
+          confine: true,
+          backgroundColor: '#1d232e', borderColor: '#333c4a', textStyle: { color: COLOR.text, fontSize: 12 },
+          formatter: function (p) {
+            var it = sorted[p.dataIndex];
+            return it.hero + (it.skin ? ' · ' + it.skin : '') + '<br/>票数 ' + fmt(it.votes);
+          }
+        },
+        xAxis: {
+          type: 'value', min: 0,
+          splitLine: { lineStyle: { color: '#1e2430' } },
+          axisLabel: { color: COLOR.muted2, fontSize: 11, formatter: function (v) { return wan(v); } },
+          axisLine: { show: false }, axisTick: { show: false }
+        },
+        yAxis: {
+          type: 'category', data: names.slice().reverse(),
+          axisLabel: { color: COLOR.muted, fontSize: 11.5, width: 150, overflow: 'truncate' },
+          axisLine: { lineStyle: { color: COLOR.line } }, axisTick: { show: false }
+        },
+        series: [{
+          type: 'bar', data: data.slice().reverse(), barMaxWidth: 16,
+          label: {
+            show: true, position: 'right', color: COLOR.muted, fontSize: 11,
+            formatter: function (p) { return wan(p.value); }
+          }
+        }]
+      }, true);
+      barChart.resize();
+    }).catch(function (e) { toast(e.message); });
+  }
+
+  /* ---------------- 渲染：趋势图 ---------------- */
+  function renderTrend() {
+    var hist = DATA.history || [];
+    var el = $('chart-trend'), empty = $('chart-trend-empty');
+    if (hist.length < 2) {
+      el.style.display = 'none'; empty.style.display = '';
+      empty.innerHTML = '<b>还没有趋势</b>至少抓到两次数据后，这里会画出票数随时间的变化。'
+        + (hist.length === 1 ? '<br/>当前已有 1 条快照：' + esc(hist[0].ts) : '');
+      return;
+    }
+    empty.style.display = 'none'; el.style.display = '';
+    loadECharts().then(function () {
+      if (!trendChart) trendChart = echarts.init(el, null, { renderer: 'canvas' });
+      var times = hist.map(function (h) { return h.ts; });
+      var last = hist[hist.length - 1].items || [];
+      var top = last.slice(0, 6);
+      var palette = [COLOR.gold, COLOR.gold2, COLOR.gold3, COLOR.teal, COLOR.teal2, COLOR.teal3];
+      var series = top.map(function (it, idx) {
+        var k = keyOf(it);
+        return {
+          name: (idx + 1) + '. ' + it.hero,
+          type: 'line', smooth: true, symbolSize: 5, connectNulls: true,
+          lineStyle: { width: 2, color: palette[idx % palette.length] },
+          itemStyle: { color: palette[idx % palette.length] },
+          emphasis: { focus: 'series' },
+          data: hist.map(function (h) {
+            var f = (h.items || []).filter(function (x) { return keyOf(x) === k; })[0];
+            return f ? Number(f.votes) : null;
+          })
+        };
+      });
+      trendChart.setOption({
+        backgroundColor: 'transparent',
+        grid: { left: 6, right: 16, top: 16, bottom: 58, containLabel: true },
+        tooltip: {
+          trigger: 'axis', confine: true,
+          backgroundColor: '#1d232e', borderColor: '#333c4a', textStyle: { color: COLOR.text, fontSize: 12 },
+          valueFormatter: function (v) { return v === null || v === undefined ? '—' : fmt(v); }
+        },
+        legend: {
+          bottom: 0, itemWidth: 14, itemHeight: 3, icon: 'roundRect',
+          textStyle: { color: COLOR.muted, fontSize: 11.5 }
+        },
+        xAxis: {
+          type: 'category', boundaryGap: false, data: times,
+          axisLabel: { color: COLOR.muted2, fontSize: 11, hideOverlap: true },
+          axisLine: { lineStyle: { color: COLOR.line } }, axisTick: { show: false }
+        },
+        yAxis: {
+          type: 'value', scale: true,
+          splitLine: { lineStyle: { color: '#1e2430' } },
+          axisLabel: { color: COLOR.muted2, fontSize: 11, formatter: function (v) { return wan(v); } }
+        },
+        series: series
+      }, true);
+      trendChart.resize();
+    }).catch(function (e) { toast(e.message); });
+  }
+
+  /* ---------------- 渲染：历史快照 ---------------- */
+  function renderSnaps() {
+    var hist = (DATA.history || []).slice().reverse();
+    var el = $('snap-list');
+    if (!hist.length) { el.innerHTML = '<div class="snap"><span class="src">暂无快照</span></div>'; return; }
+    el.innerHTML = hist.map(function (h) {
+      return '<div class="snap"><span>' + esc(h.ts) + '</span>'
+        + '<span class="src">' + (h.items || []).length + ' 项</span></div>';
+    }).join('');
+  }
+
+  /* ---------------- 自动刷新 ---------------- */
+  function schedule() {
+    clearInterval(autoTimer);
+    if (autoOn) autoTimer = setInterval(function () { loadAll(); }, 60000);
+  }
+
+  /* ---------------- 初始化 ---------------- */
+  $('btn-refresh').addEventListener('click', function () {
+    var b = this; b.disabled = true;
+    loadAll().then(function () { toast('已刷新'); b.disabled = false; })
+      .catch(function () { toast('刷新失败'); b.disabled = false; });
+  });
+  $('btn-auto').addEventListener('click', function () {
+    autoOn = !autoOn;
+    this.textContent = '自动刷新：' + (autoOn ? '开' : '关');
+    schedule();
+  });
+
+  function boot() {
+    showView((location.hash || '#rank').slice(1));
+    loadAll();
+    schedule();
+    window.addEventListener('resize', function () {
+      if (barChart) barChart.resize();
+      if (trendChart) trendChart.resize();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

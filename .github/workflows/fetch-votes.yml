@@ -1,0 +1,39 @@
+name: 返场投票数据抓取
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vote-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 抓取票数并落盘
+        run: python vote-dashboard/fetcher.py
+
+      - name: 数据有变化才提交
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vote-dashboard/data
+          if git diff --cached --quiet; then
+            echo "== 数据无变化，跳过提交 =="
+          else
+            git commit -m "vote: 更新票数快照 $(date -u +'%Y-%m-%dT%H:%MZ')"
+            git push
+          fi

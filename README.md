@@ -30,17 +30,19 @@
 王者荣耀周年庆「限定皮肤返场投票」的**实时票数抓取与排名看板**：
 展示每款参选皮肤的名次、票数、与上一名的差距，并标出返场线。
 
-- 后端 `server.py`：纯 Python 3 标准库，**零依赖**，定时抓取、解析、存 SQLite 快照
-- 前端 `投票监控台.html`：ECharts 单文件看板（KPI、排行榜、趋势曲线）
-- 活动参数（`iActivityId`/`iFlowId`/`g_tk`）可在页面配置，无需改代码
-- 提供手动导入兜底通道，抓不到包也能用
+- **在线看板**：<https://dusty-lwy.github.io/portfolio/vote-dashboard/>（手机电脑随时打开，无需电脑开机）
+- 架构：GitHub Actions 每 10 分钟定时抓取 → `data/*.json` → GitHub Pages 静态看板
+- 抓取器 `fetcher.py`：纯 Python 3 标准库零依赖，失败自动重试、超时兜底、票数无变化不提交
+- 前端 `index.html`：ECharts 单文件看板（KPI、排行榜、趋势曲线），双 CDN 容错 + 每分钟自动刷新
+- 活动参数（`iActivityId`/`iFlowId`/`g_tk`）写在 `数据源配置.json`，每期抓包后填入即可
+- 提供 `--import` 手动导入兜底通道，抓不到包也能用
 
 ```
 cd vote-dashboard
-python3 server.py        # 浏览器打开 http://127.0.0.1:8787
+python fetcher.py --import "妲己 愿照·众生和 18910170"   # 手动导入一条快照
 ```
 
-**技术栈**：Python 3 标准库 ｜ SQLite ｜ ECharts ｜ 前后端一体
+**技术栈**：Python 3 标准库 ｜ GitHub Actions ｜ GitHub Pages ｜ ECharts
 
 ---
 
