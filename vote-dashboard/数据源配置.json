@@ -1,0 +1,25 @@
+{
+  "_说明": "iActivityId / iFlowId / g_tk 每期活动都会变，必须从当期活动页抓包获取后填在这里，否则接口会返回「活动不存在」。",
+  "source": {
+    "type": "ams",
+    "request_url": "https://smoba.ams.game.qq.com/ams/ame/amesvr",
+    "query": {
+      "ameVersion": "0.3",
+      "sServiceType": "yxzj",
+      "iActivityId": "",
+      "iFlowId": "",
+      "g_tk": ""
+    },
+    "body": {
+      "iActivityId": "",
+      "iFlowId": "",
+      "g_tk": ""
+    },
+    "id_field": "sOutValue2",
+    "vote_field": "sOutValue3"
+  },
+  "poll_interval_seconds": 300,
+  "hero_map": {
+    "_格式": "{\"v_1\": {\"hero\": \"英雄名\", \"skin\": \"皮肤名\"}}"
+  }
+}

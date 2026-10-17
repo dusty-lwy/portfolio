@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>28考研 · 湖南大学408信息站</title>
+<meta name="description" content="面向2028年考研、目标湖南大学计算机学院、专业课408统考的备考信息站：官方复试线、招生名额、408科目、备考时间线、参考书目一站查询。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%239E3B32'/%3E%3Ctext x='32' y='42' font-size='26' font-family='Georgia,serif' font-weight='700' fill='%23F5EFE3' text-anchor='middle'%3E408%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --ink:#1C2530;
+  --navy:#15202E;
+  --navy-2:#1E2C3D;
+  --brand:#9E3B32;
+  --brand-600:#82302A;
+  --brand-soft:#F3E7E2;
+  --gold:#C9A227;
+  --gold-soft:#F6EBC9;
+  --paper:#F5F2EA;
+  --card:#FFFFFF;
+  --text:#222A33;
+  --text-2:#5C6672;
+  --text-3:#8A929C;
+  --line:#E3DCCF;
+  --ok:#3E7C4F;
+  --warn:#B26A2E;
+  --serif:"Noto Serif SC","Songti SC","SimSun",Georgia,serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --shadow:0 10px 30px rgba(21,32,46,.08);
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--brand);color:#fff}
+
+/* ===== 顶部导航 ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(21,32,46,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 24px;height:62px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:10px;color:#F5EFE3;font-family:var(--serif);font-weight:900;font-size:17px;letter-spacing:.5px;white-space:nowrap}
+.brand svg{flex:none}
+.brand .b-sub{font-family:var(--sans);font-weight:400;font-size:11px;color:#A8B2BD;letter-spacing:2px}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{color:#C3CBD4;font-size:14px;padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-links a.on{color:#F5EFE3;background:rgba(255,255,255,.12)}
+.nav-search-btn{display:none}
+.menu-btn{display:none}
+
+/* ===== Hero ===== */
+.hero{position:relative;background:linear-gradient(120deg,#15202E 0%,#1A2A3C 58%,#213447 100%);color:#F5EFE3;overflow:hidden;padding:150px 0 90px}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 480px at 78% -10%,rgba(201,162,39,.14),transparent 60%),radial-gradient(700px 420px at 12% 108%,rgba(158,59,50,.22),transparent 60%);pointer-events:none}
+.hero-inner{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative}
+.hero-kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:500;margin-bottom:22px}
+.hero-kicker::before{content:"";width:34px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,4.6vw,54px);line-height:1.18;letter-spacing:1px}
+.hero h1 .hl{color:var(--gold)}
+.hero p.lead{max-width:520px;margin:22px 0 34px;color:#B9C3CE;font-size:16px;font-weight:300}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:999px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:transform .18s,box-shadow .18s,background .18s;font-family:var(--sans)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-600);transform:translateY(-2px);box-shadow:0 8px 24px rgba(158,59,50,.35)}
+.btn-ghost{background:transparent;color:#F5EFE3;border:1px solid rgba(245,239,227,.35)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-fig{position:relative}
+.hero-fig img{width:100%;height:360px;object-fit:cover;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.45);outline:3px solid rgba(201,162,39,.35);outline-offset:8px}
+.hero-fig .fig-cap{position:absolute;left:14px;bottom:14px;background:rgba(21,32,46,.82);backdrop-filter:blur(4px);padding:8px 14px;border-radius:10px;font-size:12px;color:#E7C97E;letter-spacing:1px}
+.hero-stats{max-width:1180px;margin:64px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+.hstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:18px 20px}
+.hstat .v{font-family:var(--serif);font-weight:900;font-size:30px;color:#F5EFE3;line-height:1.2}
+.hstat .v em{font-style:normal;color:var(--gold)}
+.hstat .k{font-size:12.5px;color:#9FABB8;margin-top:4px;letter-spacing:.5px}
+
+/* ===== 搜索区 ===== */
+.search-wrap{position:relative;max-width:1180px;margin:-46px auto 0;padding:0 24px;z-index:20}
+.search-box{background:var(--card);border-radius:18px;box-shadow:0 18px 50px rgba(21,32,46,.16);padding:22px 26px}
+.search-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.search-head h2{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--ink)}
+.search-head .tip{font-size:12.5px;color:var(--text-3)}
+.search-input-row{display:flex;gap:10px}
+.search-input-row input{flex:1;height:52px;border:2px solid var(--line);border-radius:12px;padding:0 18px;font-size:15px;font-family:var(--sans);color:var(--text);outline:none;transition:border-color .2s;background:#FBF9F4}
+.search-input-row input:focus{border-color:var(--brand)}
+.search-input-row button{height:52px;padding:0 26px;border:none;border-radius:12px;background:var(--brand);color:#fff;font-size:15px;font-weight:500;cursor:pointer;font-family:var(--sans);transition:background .2s}
+.search-input-row button:hover{background:var(--brand-600)}
+.search-hints{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.search-hints span{font-size:12.5px;color:var(--text-3)}
+.chip{font-size:12.5px;color:var(--brand);background:var(--brand-soft);border:1px solid #E7D3CB;padding:3px 12px;border-radius:999px;cursor:pointer;transition:background .2s}
+.chip:hover{background:#EBD8CF}
+.search-results{display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:12px;max-height:340px;overflow:auto}
+.search-results.show{display:block}
+.sr-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background .15s}
+.sr-item:hover{background:var(--brand-soft)}
+.sr-item .tag{flex:none;font-size:11px;color:#fff;background:var(--navy-2);padding:2px 10px;border-radius:999px;letter-spacing:1px}
+.sr-item .t{font-size:14px;color:var(--text)}
+.sr-item .d{font-size:12px;color:var(--text-3);margin-left:auto;text-align:right;max-width:46%}
+.sr-empty{padding:18px 12px;color:var(--text-3);font-size:14px;text-align:center}
+
+/* ===== 通用section ===== */
+section{scroll-margin-top:76px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.sec{padding:76px 0}
+.sec-head{margin-bottom:38px;max-width:760px}
+.sec-kicker{font-size:12px;letter-spacing:4px;color:var(--brand);font-weight:700;margin-bottom:10px}
+.sec-head h2{font-family:var(--serif);font-weight:900;font-size:clamp(26px,3vw,36px);color:var(--ink);line-height:1.3}
+.sec-head p{color:var(--text-2);font-size:15px;margin-top:12px}
+.sec-more{color:var(--text-3);font-size:13px;margin-top:10px}
+
+/* ===== 表格 ===== */
+.tbl-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.tbl-card .tbl-title{display:flex;align-items:center;gap:10px;padding:16px 22px;border-bottom:1px solid var(--line);font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink)}
+.tbl-card .tbl-title .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+.tbl-scroll{overflow-x:auto}
+table.data{width:100%;border-collapse:collapse;table-layout:fixed}
+table.data th{font-size:13px;font-weight:500;color:var(--text-2);text-align:left;padding:12px 18px;border-bottom:1px solid var(--line);background:#FAF7F0;white-space:nowrap}
+table.data td{padding:13px 18px;font-size:14px;border-bottom:1px solid #EFE9DD;color:var(--text)}
+table.data tr:last-child td{border-bottom:none}
+table.data tr:hover td{background:#FBF7EF}
+table.data td.num{font-family:Georgia,serif;font-variant-numeric:tabular-nums}
+table.data td .badge{display:inline-block;font-size:11px;padding:2px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand);font-weight:500}
+table.data td .badge.gold{background:var(--gold-soft);color:#8A6D14}
+td{vertical-align:middle}
+
+/* ===== 卡片栅格 ===== */
+.grid{display:grid;gap:18px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;border:1px solid rgba(227,220,207,.5)}
+.card h3{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.card h3 .ic{width:34px;height:34px;border-radius:9px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;flex:none}
+.card p{font-size:13.5px;color:var(--text-2)}
+.card .kv{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
+.card .kv b{font-size:15px;color:var(--brand);font-family:Georgia,serif}
+.card .kv span{display:block;font-size:12px;color:var(--text-3);margin-top:2px}
+
+/* ===== 折叠/时间轴 ===== */
+details.faq{background:var(--card);border:1px solid rgba(227,220,207,.6);border-radius:12px;margin-bottom:12px;overflow:hidden}
+details.faq summary{list-style:none;cursor:pointer;padding:17px 22px;font-size:15px;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:12px}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary .q{flex:none;width:24px;height:24px;border-radius:7px;background:var(--brand);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:var(--serif)}
+details.faq summary .arr{margin-left:auto;transition:transform .2s;color:var(--text-3)}
+details.faq[open] summary .arr{transform:rotate(180deg)}
+details.faq .a{padding:0 22px 18px 58px;font-size:14px;color:var(--text-2)}
+details.faq .a b{color:var(--ink)}
+
+.tl{position:relative}
+.tl::before{content:"";position:absolute;top:0;bottom:0;left:calc(158px + 29px);width:2px;background:var(--line)}
+.tl-item{position:relative;display:grid;grid-template-columns:158px 60px 1fr}
+.tl-time{padding:6px 0;text-align:right;font-family:Georgia,serif;font-size:14px;color:var(--brand);font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.tl-axis{display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.tl-node{width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--brand);flex:none;margin-top:8px;z-index:1}
+.tl-body{padding:2px 0 26px 22px}
+.tl-body .tt{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink)}
+.tl-body .tt .now{display:inline-block;font-size:11px;background:var(--gold);color:#3A2E08;padding:1px 10px;border-radius:999px;margin-left:8px;vertical-align:2px;font-family:var(--sans);font-weight:700}
+.tl-body .td{font-size:13.5px;color:var(--text-2);margin-top:5px}
+.tl-body .td .src{color:var(--text-3);font-size:12px}
+
+/* ===== 图表容器 ===== */
+.chart{width:100%}
+.chart-box{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.chart-box h3{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:14px}
+.chart-box .note{font-size:12px;color:var(--text-3);margin-top:8px}
+
+/* ===== 官方渠道/页脚 ===== */
+.official-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.off-card{display:flex;gap:16px;align-items:flex-start;background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.off-card .ic{width:44px;height:44px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;flex:none}
+.off-card h4{font-size:15px;font-weight:700;color:var(--ink)}
+.off-card p{font-size:13px;color:var(--text-2);margin-top:3px}
+.off-card .url{font-size:13px;color:var(--brand);word-break:break-all;margin-top:6px;font-family:Georgia,serif}
+
+.footer{background:var(--navy);color:#AEB8C3;margin-top:30px}
+.footer-inner{max-width:1180px;margin:0 auto;padding:52px 24px 40px}
+.footer .f-brand{font-family:var(--serif);font-weight:900;font-size:20px;color:#F5EFE3;letter-spacing:1px}
+.footer .f-brand span{color:var(--gold)}
+.footer .f-desc{margin-top:10px;font-size:13px;max-width:640px}
+.footer .f-src{margin-top:18px;font-size:12px;color:#7E8996;border-top:1px solid rgba(255,255,255,.1);padding-top:18px}
+.footer .f-src b{color:#A8B2BD;font-weight:500}
+.footer .f-bottom{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:#7E8996}
+.footer .f-bottom a{color:#9FAAB6}
+
+/* ===== 回到顶部 ===== */
+.to-top{position:fixed;right:26px;bottom:30px;width:46px;height:46px;border-radius:50%;background:var(--brand);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(158,59,50,.4);z-index:90;transition:transform .2s}
+.to-top.show{display:flex}
+.to-top:hover{transform:translateY(-3px)}
+
+/* ===== 响应式 ===== */
+@media (max-width:1000px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .hero-inner{grid-template-columns:1fr;gap:36px}
+  .hero-fig img{height:280px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);margin-top:48px}
+  .official-grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .nav-links{position:fixed;top:62px;left:0;right:0;background:var(--navy);flex-direction:column;padding:12px 20px 20px;display:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-links.open{display:flex}
+  .menu-btn{display:flex;margin-left:auto;width:40px;height:40px;border:1px solid rgba(255,255,255,.2);background:none;border-radius:9px;color:#F5EFE3;align-items:center;justify-content:center;cursor:pointer}
+  .brand .b-sub{display:none}
+  .grid-3,.grid-2{grid-template-columns:1fr}
+  .g2-overview,.g2-subjects,.g2-history{grid-template-columns:1fr!important}
+  .tl-item{grid-template-columns:112px 40px 1fr}
+  .tl-time{font-size:12.5px}
+  .tl::before{left:calc(112px + 19px)}
+  .tl-body{padding-left:16px}
+  .sec{padding:56px 0}
+  .hero{padding:120px 0 80px}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:12px}
+  .search-input-row{flex-direction:column}
+  .search-input-row button{height:46px}
+  .chart-box{padding:16px}
+  details.faq .a{padding-left:22px}
+  table.data th,table.data td{padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="8" width="28" height="20" rx="3" fill="#9E3B32"/><rect x="14" y="4" width="4" height="6" fill="#C9A227"/><path d="M6 14h20M6 18h20M6 22h12" stroke="#F5EFE3" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>28考研 · 湖大408信息站</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#overview" data-nav="overview">考情速览</a>
+      <a href="#subjects" data-nav="subjects">408科目</a>
+      <a href="#history" data-nav="history">改考408</a>
+      <a href="#timeline" data-nav="timeline">备考时间线</a>
+      <a href="#books" data-nav="books">参考书目</a>
+      <a href="#faq" data-nav="faq">常见问题</a>
+      <a href="#official" data-nav="official">官方渠道</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="打开菜单"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kicker">HUNAN UNIVERSITY · 408 KAOYAN</div>
+      <h1>28考研，<span class="hl">向岳麓山</span>出发</h1>
+      <p class="lead">湖南大学计算机学院 408 统考备考信息站：官方复试线、统考名额、四科分值、备考节奏、参考书目，一站查清。目标 2027 年 12 月初试、2028 年 9 月入学。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#overview">查看考情</a>
+        <a class="btn btn-ghost" href="#timeline">备考节奏</a>
+      </div>
+    </div>
+    <div class="hero-fig">
+      <img src="assets/yuelu-gate.jpg" alt="岳麓书院正门：惟楚有材，于斯为盛">
+      <div class="fig-cap">惟楚有材 · 于斯为盛</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="v">365<em>分</em></div><div class="k">2026 学硕复试线（081200）</div></div>
+    <div class="hstat"><div class="v">368<em>分</em></div><div class="k">2026 专硕复试线（085400）</div></div>
+    <div class="hstat"><div class="v">149<em>人</em></div><div class="k">2026 三个专业统考名额</div></div>
+    <div class="hstat"><div class="v">4<em>门</em></div><div class="k">408 统考科目 · 150 分</div></div>
+  </div>
+</header>
+
+<!-- ===== 站内搜索 ===== -->
+<div class="search-wrap" id="searchSec">
+  <div class="search-box">
+    <div class="search-head">
+      <h2>站内搜索</h2>
+      <span class="tip">输入关键词，快速定位信息模块</span>
+    </div>
+    <div class="search-input-row">
+      <input id="searchInput" type="text" placeholder="试试：复试线 / 408 / 数据结构 / 招生人数 / 学费 / 机试…" autocomplete="off">
+      <button id="searchBtn" type="button">搜索</button>
+    </div>
+    <div class="search-hints">
+      <span>热门：</span>
+      <span class="chip" data-q="复试线">复试线</span>
+      <span class="chip" data-q="数据结构">数据结构</span>
+      <span class="chip" data-q="招生人数">招生人数</span>
+      <span class="chip" data-q="机试">机试</span>
+      <span class="chip" data-q="学费">学费</span>
+      <span class="chip" data-q="参考书">参考书</span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ===== 考情速览 ===== -->
+<section class="sec" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">OFFICIAL DATA · 2026</div>
+      <h2>官方考情速览</h2>
+      <p>以下为湖南大学计算机学院 2026 年官方公布的最近完整数据（2026 年 3 月发布）。2028 考研招生简章预计 2027 年 9 月发布，现阶段备考请以本组数据为基准。</p>
+    </div>
+
+    <div class="grid grid-2 g2-overview" style="grid-template-columns:1.15fr .85fr">
+      <div class="tbl-card">
+        <div class="tbl-title"><span class="dot"></span>2026 复试分数线（官方）</div>
+        <div class="tbl-scroll">
+          <table class="data">
+            <colgroup><col style="width:14%"><col style="width:34%"><col style="width:16%"><col style="width:18%"><col style="width:18%"></colgroup>
+            <thead><tr><th>专业代码</th><th>专业名称</th><th>总分线</th><th>单科(100分)</th><th>单科(&gt;100分)</th></tr></thead>
+            <tbody>
+              <tr><td class="num">081000</td><td>信息与通信工程</td><td class="num"><b>364</b></td><td class="num">50</td><td class="num">75</td></tr>
+              <tr><td class="num">081200</td><td>计算机科学与技术</td><td class="num"><b>365</b></td><td class="num">50</td><td class="num">75</td></tr>
+              <tr><td class="num">085400</td><td>电子信息（专硕）</td><td class="num"><b>368</b></td><td class="num">50</td><td class="num">75</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:12px 22px;font-size:12px;color:var(--text-3);border-top:1px solid var(--line)">来源：计算机学院《2026 年硕士研究生招生复试录取工作实施细则》（2026-03-20）</div>
+      </div>
+
+      <div class="tbl-card">
+        <div class="tbl-title"><span class="dot" style="background:var(--gold)"></span>2026 统考招生计划（普通计划）</div>
+        <div class="tbl-scroll">
+          <table class="data">
+            <colgroup><col style="width:20%"><col style="width:40%"><col style="width:20%"><col style="width:20%"></colgroup>
+            <thead><tr><th>专业代码</th><th>专业名称</th><th>学习方式</th><th>统考名额</th></tr></thead>
+            <tbody>
+              <tr><td class="num">081000</td><td>信息与通信工程</td><td>全日制</td><td class="num"><b>21</b></td></tr>
+              <tr><td class="num">081200</td><td>计算机科学与技术</td><td>全日制</td><td class="num"><b>25</b></td></tr>
+              <tr><td class="num">085400</td><td>电子信息</td><td>全日制</td><td class="num"><b>103</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:12px 22px;font-size:12px;color:var(--text-3);border-top:1px solid var(--line)">不含少干、退役士兵等专项计划名额；2026 年学院所有专业均不接收调剂</div>
+      </div>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:18px">
+      <div class="card">
+        <h3><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg></span>学制</h3>
+        <p>硕士学制 3 年。全日制学习，毕业获学位证书与学历证书。</p>
+        <div class="kv"><b>3 年</b><span>标准学制</span></div>
+      </div>
+      <div class="card">
+        <h3><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18" stroke-linecap="round"/></svg></span>学费</h3>
+        <p>学硕 8000 元/年，全日制专硕 12000 元/年，非全日制电子信息 15000 元/年。</p>
+        <div class="kv"><b>0.8–1.5 万</b><span>元 / 年</span></div>
+      </div>
+      <div class="card">
+        <h3><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 6.1L21 9l-5 4.3L17.4 20 12 16.6 6.6 20 8 13.3 3 9l6.4-.9z"/></svg></span>奖学金</h3>
+        <p>学业奖学金一等 1 万/年、二等 0.5 万/年、三等 0.3 万/年；另享国家助学金 0.6 万/年。</p>
+        <div class="kv"><b>最高 1.6 万</b><span>奖学金 + 助学金 / 年</span></div>
+      </div>
+      <div class="card">
+        <h3><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h8M8 14h5"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg></span>复试构成</h3>
+        <p>现场复试：机试（编程闭卷 100 分，120 分钟）+ 综合面试（150 分）。总成绩 = 初试 + 复试。</p>
+        <div class="kv"><b>机试 + 面试</b><span>综合面试规格化至均分 120 分</span></div>
+      </div>
+    </div>
+
+    <details class="faq" style="margin-top:18px">
+      <summary><span class="q">参</span>2024 年（自命题 866 时期）分方向参考数据 <span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">
+        <p style="margin-bottom:10px">2025 年及以前湖大计算机初试专业课为自命题（866）数据结构，且电子信息按方向招生；<b>2026 年起改为 408 统考，以下数据仅作难度参考，不能直接对照</b>。</p>
+        <div class="tbl-scroll">
+          <table class="data">
+            <colgroup><col style="width:26%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:18%"></colgroup>
+            <thead><tr><th>专业 / 方向（2024）</th><th>总招生</th><th>推免</th><th>统考</th><th>复试线</th><th>备注</th></tr></thead>
+            <tbody>
+              <tr><td>081200 计算机科学与技术</td><td class="num">39</td><td class="num">27</td><td class="num">12</td><td class="num">350</td><td>推免占比高，统考名额少</td></tr>
+              <tr><td>085400 电子信息·计算机技术</td><td class="num">43</td><td class="num">16</td><td class="num">27</td><td class="num">320</td><td>统考名额较多</td></tr>
+              <tr><td>085400 电子信息·软件工程</td><td class="num">24</td><td class="num">8</td><td class="num">16</td><td class="num">330</td><td>竞争中等</td></tr>
+              <tr><td>085400 电子信息·人工智能</td><td class="num">14</td><td class="num">4</td><td class="num">10</td><td class="num">340</td><td>规模较小</td></tr>
+              <tr><td>085400 电子信息·网络空间安全</td><td class="num">11</td><td class="num">3</td><td class="num">8</td><td class="num">335</td><td>名额少</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 408科目 ===== -->
+<section class="sec" id="subjects" style="background:var(--card)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">408 COMPUTER SCIENCE</div>
+      <h2>408 计算机学科专业基础</h2>
+      <p>教育部统一命题，涵盖四门专业基础课，总分 150 分：40 道单选题（每题 2 分，共 80 分）+ 7 道综合题（共 70 分），考试时长 180 分钟。全国同卷，命题风格稳定，近年已有 300 余所院校采用。</p>
+    </div>
+
+    <div class="grid grid-2 g2-subjects" style="grid-template-columns:.9fr 1.1fr">
+      <div class="chart-box">
+        <h3>四科分值构成（150 分）</h3>
+        <div class="chart" id="pieChart" style="height:300px"></div>
+        <div class="note">数据来源：教育部考试大纲（数据结构 45 分、计算机组成原理 45 分、操作系统 35 分、计算机网络 25 分）</div>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px;align-content:start">
+        <div class="card" style="box-shadow:none;border:1px solid var(--line)">
+          <h3 style="font-size:15px"><span class="ic" style="background:#E9E4F5;color:#5A4A9E">DS</span>数据结构</h3>
+          <p>线性表、树与图、查找排序。入门必修，理解算法思路与复杂度分析。</p>
+          <div class="kv"><b>45 分</b><span>严蔚敏《数据结构（C语言版）》</span></div>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px solid var(--line)">
+          <h3 style="font-size:15px"><span class="ic" style="background:#E3EDE7;color:#3E7C4F">CO</span>组成原理</h3>
+          <p>数据表示、存储系统、指令系统、CPU、总线与 I/O。硬件基础，概念最密集。</p>
+          <div class="kv"><b>45 分</b><span>唐朔飞《计算机组成原理》</span></div>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px solid var(--line)">
+          <h3 style="font-size:15px"><span class="ic" style="background:#FBEEDC;color:#B26A2E">OS</span>操作系统</h3>
+          <p>进程管理、内存管理、文件与 I/O。与组成原理联动紧密，PV 操作为重点。</p>
+          <div class="kv"><b>35 分</b><span>汤小丹《计算机操作系统》</span></div>
+        </div>
+        <div class="card" style="box-shadow:none;border:1px solid var(--line)">
+          <h3 style="font-size:15px"><span class="ic" style="background:#E2E9F3;color:#2C5A8A">CN</span>计算机网络</h3>
+          <p>五层体系结构、TCP/IP、应用层协议。记忆点多，性价比高，后期可快速提分。</p>
+          <div class="kv"><b>25 分</b><span>谢希仁《计算机网络》</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 改考408 ===== -->
+<section class="sec" id="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">WHY 2028</div>
+      <h2>湖大全面改考 408，28 考研意味着什么</h2>
+      <p>湖南大学计算机学院正分批将初试专业课从自命题（866）数据结构切换为全国统考 408。对 28 考研的同学来说，<b>学院全部招生专业将统一为 408</b>，信息更透明、备考更确定。</p>
+    </div>
+
+    <div class="grid grid-2 g2-history" style="grid-template-columns:1.15fr .85fr">
+      <div class="card" style="box-shadow:none;border:1px solid var(--line);padding:26px 20px">
+        <h3 style="margin-bottom:20px">改考 408 时间轴</h3>
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-time">2025-05-22</div>
+            <div class="tl-axis"><span class="tl-node"></span></div>
+            <div class="tl-body"><div class="tt">学硕 + 网安改考 408</div><div class="td">081200 计算机科学与技术、083900 网络空间安全，初试由 866 调整为 408，2026 考研起执行。<span class="src">学院官网通知</span></div></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">2026-05-19</div>
+            <div class="tl-axis"><span class="tl-node"></span></div>
+            <div class="tl-body"><div class="tt">电子信息专硕改考 408</div><div class="td">085400 电子信息由 866 调整为 408，2027 考研起执行。至此学院全部专业统一 408。<span class="src">学院官网通知</span></div></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">2027 年秋</div>
+            <div class="tl-axis"><span class="tl-node"></span></div>
+            <div class="tl-body"><div class="tt">28 考研招生简章发布</div><div class="td">预计 2027 年 9 月发布《湖南大学 2028 年硕士研究生招生专业目录》，确认最终招生人数与科目。</div></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">2027 年 12 月</div>
+            <div class="tl-axis"><span class="tl-node"></span></div>
+            <div class="tl-body"><div class="tt">28 考研初试</div><div class="td">全国硕士研究生招生初试，408 与其他科目同日开考，全国同卷同卷面。</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="chart-box" style="height:100%">
+          <h3>2026 年复试线对比（官方）</h3>
+          <div class="chart" id="barChart" style="height:300px"></div>
+          <div class="note">三个专业统一划线口径：单科 50 / 75。电子信息（085400）招生体量最大，线也最高。</div>
+        </div>
+        <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+          <img src="assets/dacheng.jpg" alt="岳麓书院大成殿" style="width:100%;height:130px;object-fit:cover">
+          <div style="padding:18px 22px;border-left:4px solid var(--brand)">
+            <h3 style="font-size:15px">为什么说这是机会</h3>
+            <p style="font-size:13.5px">统一改 408 后，历年真题、大纲、辅导资料都是全国公开资源，不存在"自命题信息差"；湖大 2026 年专硕统考名额达 103 人，体量在同类 985 中相当可观。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 备考时间线 ===== -->
+<section class="sec" id="timeline" style="background:var(--card)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">ROADMAP · 2026.10 → 2028.09</div>
+      <h2>28 考研全程节奏</h2>
+      <p>当前 2026 年 10 月，距 28 考研初试（2027 年 12 月下旬）约 14 个月。以下按"基础 → 强化 → 冲刺 → 复试"四段规划，408 建议全程主攻，政治英语数学按自己的底子并行安排。</p>
+    </div>
+
+    <div class="card" style="box-shadow:none;border:1px solid var(--line);padding:26px 20px">
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-time">2026.10–2027.02</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">基础阶段 · 一<span class="now">当前阶段</span></div><div class="td">主攻<b>数据结构 + 组成原理</b>：精读教材、配合王道基础篇，刷课后题与基础选择。两门课分值占比最高（各 45 分），先啃硬骨头。C 语言薄弱者同步补 C 语言。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2027.03–2027.06</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">基础阶段 · 二</div><div class="td">主攻<b>操作系统 + 计算机网络</b>：完成四科第一轮。操作系统重点理解进程/内存/文件三大管理；计算机网络搭好体系框架，注重记忆与辨析。英语、数学同步推进到强化。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2027.07–2027.09</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">强化阶段</div><div class="td">王道二轮 + <b>真题分类训练</b>：按题型刷 408 历年真题（而不是按年份整套刷），总结每类大题的通用解法；组原与操作系统跨章节综合题开始重点突破。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2027.10</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">大纲 + 报名</div><div class="td">教育部发布 2028 考研大纲与湖大招生简章，核对 408 大纲变化；<b>10 月研招网正式报名</b>，确认报考专业与考试方式，切勿错过时间节点。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2027.11</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">冲刺阶段</div><div class="td">整套真题限时模拟（408 共 180 分钟），错题本二刷三刷；背诵类（网络、组原细节）集中记忆；数学进入真题+模拟卷节奏。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2027.12下旬</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">初试</div><div class="td">全国统一初试。考前一天确认考点、证件与文具，保持作息。<b>408 在专业课考试日（通常为初试最后一天下午）</b>，时长 3 小时。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2028.02–03</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">出分 + 复试</div><div class="td">2 月下旬出分、3 月中旬公布复试线。湖大复试为现场复试：<b>机试（编程闭卷 100 分）+ 综合面试（150 分）</b>，总成绩 = 初试 + 复试。提前练编程手感。</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2028.09</div>
+          <div class="tl-axis"><span class="tl-node"></span></div>
+          <div class="tl-body"><div class="tt">入学</div><div class="td">报到注册，开启岳麓山下的研究生生活。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-4" style="margin-top:18px">
+      <div class="card" style="border-top:4px solid var(--brand)">
+        <h3 style="font-size:15px">基础期</h3>
+        <p>四科各至少一轮精读 + 王道同步。目标：看懂教材、选择题正确率 60% 以上。</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <h3 style="font-size:15px">强化期</h3>
+        <p>真题分类二刷三刷，大题解法成体系。目标：大题能独立写出完整思路与伪代码。</p>
+      </div>
+      <div class="card" style="border-top:4px solid #2C5A8A">
+        <h3 style="font-size:15px">冲刺期</h3>
+        <p>整套限时模拟，错题闭环，背诵记忆收尾。目标：模拟稳定在目标线以上 15–20 分。</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--ok)">
+        <h3 style="font-size:15px">复试期</h3>
+        <p>保持编程手感（湖大有机试），准备简历与项目经历，练英语口语与专业面试表达。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 参考书目 ===== -->
+<section class="sec" id="books">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">BOOKS & MATERIALS</div>
+      <h2>参考书目与资料</h2>
+      <p>408 是全国统考，备考资料完全公开。教材打底、王道系列主攻、真题定成败。</p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card">
+        <h3 style="font-size:15px"><span class="ic" style="background:#E9E4F5;color:#5A4A9E">DS</span>数据结构</h3>
+        <p>严蔚敏《数据结构（C语言版）》</p>
+        <div class="kv"><span>清华大学出版社</span><span>教材 + 配套习题集</span></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px"><span class="ic" style="background:#E3EDE7;color:#3E7C4F">CO</span>组成原理</h3>
+        <p>唐朔飞《计算机组成原理》</p>
+        <div class="kv"><span>高等教育出版社</span><span>概念细节最密集，结合真题记忆</span></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px"><span class="ic" style="background:#FBEEDC;color:#B26A2E">OS</span>操作系统</h3>
+        <p>汤小丹《计算机操作系统》</p>
+        <div class="kv"><span>西安电子科技大学出版社</span><span>与组原联动，注意跨章节综合</span></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px"><span class="ic" style="background:#E2E9F3;color:#2C5A8A">CN</span>计算机网络</h3>
+        <p>谢希仁《计算机网络》</p>
+        <div class="kv"><span>电子工业出版社</span><span>体系框架 + 记忆辨析</span></div>
+      </div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:18px">
+      <div class="card" style="border-left:4px solid var(--brand)">
+        <h3 style="font-size:15px">辅导主用</h3>
+        <p>王道系列：408 复习指导（四科各一册）+ 真题详解。覆盖全部考点，配套习题质量高，是绝大多数考生的主力资料。</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--gold)">
+        <h3 style="font-size:15px">历年真题</h3>
+        <p>408 有完整的全国统考真题，从近 5 年开始刷，先分类后整套。真题是把握命题风格与难度的唯一权威来源。</p>
+      </div>
+      <div class="card" style="border-left:4px solid #2C5A8A">
+        <h3 style="font-size:15px">大纲依据</h3>
+        <p>以教育部考试院发布的《计算机学科专业基础综合考试大纲》为准，每年 9 月更新。教材版本如有新版，以大纲对应章节为准。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 常见问题 ===== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">FAQ</div>
+      <h2>常见问题</h2>
+      <p>点击展开查看答案。更多问题可在搜索框直接查询。</p>
+    </div>
+
+    <details class="faq">
+      <summary><span class="q">1</span>28 考研具体是什么时间？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a"><b>2027 年 12 月下旬初试，2028 年 9 月入学</b>。全国初试一般在 12 月最后一个周末（两天：政治/外语 + 业务课一/业务课二），408 属于业务课二。现在（2026 年 10 月）开始准备约有 14 个月，时间充裕但节奏要稳。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">2</span>湖南大学哪些专业考 408？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">计算机学院（信息科学与工程学院）三个招生专业：<b>081200 计算机科学与技术（学硕）、083900 网络空间安全（学硕）、085400 电子信息（专硕）</b>。学硕与网安自 2026 考研起考 408，电子信息自 2027 考研起考 408 —— 到 28 考研，全部专业统一为 408。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">3</span>复试线大概多少分？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">2026 年官方复试线：<b>信息与通信工程 364 分、计算机科学与技术 365 分、电子信息 368 分</b>（单科 50/75）。这是近三年最高的一档——2026 年是学硕改考 408 第一年、专硕仍为自命题。28 考研改为全统考后难度与划线会重新平衡，建议把目标定在<b>初试 380+</b> 更稳妥。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">4</span>统考招生名额有多少？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">2026 年普通计划统考名额：<b>信息与通信工程 21 人、计算机科学与技术 25 人、电子信息 103 人</b>，合计 149 人（不含专项计划）。学硕推免比例高、统考名额少；专硕体量大、性价比突出。28 考研具体人数以 2027 年 9 月发布的招生目录为准。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">5</span>复试考什么？难吗？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">现场复试，含两个环节：<b>机试</b>（编程闭卷，满分 100 分，120 分钟，需现场写代码）+ <b>综合面试</b>（满分 150 分，每人不少于 20 分钟，考查专业素养、英语听说与综合素质）。<b>总成绩 = 初试成绩 + 复试成绩</b>，择优录取；复试不合格（规格化前面试低于 90 分等）不予录取，学院不接收调剂。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">6</span>本科不是计算机专业，可以跨考吗？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">可以。408 是统考，所有考生同一张卷、同样的公开资料，跨考生没有信息劣势；但四科内容量大、C 语言是工具，跨考建议<b>提前半年以上补 C 语言与程序设计基础</b>，并在基础阶段多留时间给组成原理。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">7</span>学费和奖学金情况？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">学制 3 年。学硕学费 8000 元/年，全日制专硕 12000 元/年。全日制研究生可申请学业奖学金（一等 1 万/年、二等 0.5 万/年、三等 0.3 万/年），同时享受国家助学金 0.6 万/年，另有国家奖学金、校长奖学金等。</div>
+    </details>
+    <details class="faq">
+      <summary><span class="q">8</span>最新信息去哪里看？<span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" stroke-linecap="round"/></svg></span></summary>
+      <div class="a">三个官方渠道：<b>计算机学院官网</b> csee.hnu.edu.cn（复试细则、拟录取名单）；<b>研究生院</b> gra.hnu.edu.cn（复试基本分数线、招生简章）；<b>研招网</b> yz.chsi.com.cn（报名、大纲）。学院研招咨询电话 0731-88821776，邮箱 xkyzb@hnu.edu.cn。</div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 官方渠道 ===== -->
+<section class="sec" id="official" style="background:linear-gradient(180deg,var(--card) 0%,#F1EDE3 100%)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">OFFICIAL CHANNELS</div>
+      <h2>官方渠道</h2>
+      <p>所有招生信息请以官方发布为准，谨防各类"内部渠道""保过班"骗局。</p>
+    </div>
+    <div class="official-grid">
+      <a class="off-card" href="https://csee.hnu.edu.cn/" target="_blank" rel="noopener">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" stroke-linejoin="round"/></svg></span>
+        <div><h4>计算机学院官网</h4><p>复试细则 · 拟录取名单 · 改考通知</p><div class="url">csee.hnu.edu.cn</div></div>
+      </a>
+      <a class="off-card" href="https://gra.hnu.edu.cn/" target="_blank" rel="noopener">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2z" stroke-linejoin="round"/></svg></span>
+        <div><h4>湖南大学研究生院</h4><p>复试基本分数线 · 招生简章 · 专业目录</p><div class="url">gra.hnu.edu.cn</div></div>
+      </a>
+      <a class="off-card" href="https://yz.chsi.com.cn/" target="_blank" rel="noopener">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/></svg></span>
+        <div><h4>研招网（学信网）</h4><p>网上报名 · 考试大纲 · 调剂系统</p><div class="url">yz.chsi.com.cn</div></div>
+      </a>
+      <div class="off-card">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke-linejoin="round"/></svg></span>
+        <div><h4>学院研招咨询</h4><p>李老师 · 工作日咨询</p><div class="url">0731-88821776 · xkyzb@hnu.edu.cn</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="f-brand">28考研 · <span>湖大408信息站</span></div>
+    <p class="f-desc">面向 2028 考研、目标湖南大学计算机学院、专业课 408 统考的备考者。本站将公开渠道的考情信息整理为一站式页面，帮助你快速了解分数线、名额、科目与节奏。</p>
+    <div class="f-src">
+      <b>主要数据来源：</b>湖南大学计算机学院《2026 年硕士研究生招生复试录取工作实施细则》（2026-03-20）；《关于调整我院计算机科学与技术等专业 2026 年硕士研究生招生考试初试科目的通知》（2025-05-22）；《关于调整我院电子信息专业 2027 年硕士研究生招生考试初试科目的通知》（2026-05-19）；教育部考试大纲；新东方在线考情整理（学费奖学金口径）。
+    </div>
+    <div class="f-bottom">
+      <span>免责声明：本站为非官方信息整理页面，28 考研一切招生信息以湖南大学官方发布的《2028 年硕士研究生招生简章》与教育部考试大纲为准。</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+<script>
+/* ===== 站内搜索数据 ===== */
+var SEARCH_DATA = [
+  {tag:'考情', t:'复试线：2026 官方（学硕 365 / 专硕 368 / 信通 364）', d:'2026 年学院复试分数线', anchor:'overview', kw:'复试线 分数线 365 368 364 初试线'},
+  {tag:'考情', t:'统考招生名额：计科 25、电子信息 103、信通 21', d:'2026 普通计划统考名额', anchor:'overview', kw:'招生人数 统考 名额 计划 电子信息 计算机科学与技术 信息与通信工程'},
+  {tag:'考情', t:'学制 3 年，学费学硕 8000 / 专硕 12000 元每年', d:'学费 学制 奖学金', anchor:'overview', kw:'学费 学制 奖学金 助学金 钱 费用'},
+  {tag:'考情', t:'复试构成：机试 100 分 + 综合面试 150 分', d:'总成绩 = 初试 + 复试', anchor:'overview', kw:'复试 机试 面试 编程 上机'},
+  {tag:'科目', t:'408 四科：数据结构 45 分、组成原理 45 分、操作系统 35 分、网络 25 分', d:'总分 150，单选 40 题 + 综合 7 题', anchor:'subjects', kw:'408 科目 分值 数据结构 组成原理 操作系统 计算机网络 试卷 结构 题型'},
+  {tag:'科目', t:'数据结构：线性表、树图、查找排序，严蔚敏教材', d:'45 分 · 基础核心', anchor:'subjects', kw:'数据结构 严蔚敏 算法'},
+  {tag:'科目', t:'组成原理：数据表示、存储、指令、CPU，唐朔飞教材', d:'45 分 · 概念最密集', anchor:'subjects', kw:'组成原理 唐朔飞 硬件 存储 指令'},
+  {tag:'科目', t:'操作系统：进程、内存、文件与 I/O，汤小丹教材', d:'35 分 · PV 操作重点', anchor:'subjects', kw:'操作系统 汤小丹 进程 内存 文件'},
+  {tag:'科目', t:'计算机网络：五层体系、TCP/IP，谢希仁教材', d:'25 分 · 记忆点多', anchor:'subjects', kw:'计算机网络 谢希仁 TCP IP 网络'},
+  {tag:'改考', t:'2025-05 学硕与网安（081200/083900）改考 408', d:'2026 考研起执行', anchor:'history', kw:'改考 408 学硕 网络空间安全 866 改革'},
+  {tag:'改考', t:'2026-05 电子信息专硕（085400）改考 408', d:'2027 考研起执行，全学院统一', anchor:'history', kw:'改考 408 专硕 电子信息 866 改革'},
+  {tag:'时间', t:'现在（2026.10）→ 初试（2027.12）约 14 个月备考窗口', d:'全程节奏：基础 → 强化 → 冲刺 → 复试', anchor:'timeline', kw:'时间线 备考 规划 计划 阶段 几个月 多久 什么时候'},
+  {tag:'时间', t:'2027.10 研招网正式报名，2027 年 9 月发布招生简章', d:'关键节点不要错过', anchor:'timeline', kw:'报名 大纲 简章 招生目录 研招网'},
+  {tag:'书目', t:'教材：严蔚敏 / 唐朔飞 / 汤小丹 / 谢希仁 四本经典', d:'教材打底', anchor:'books', kw:'参考书 教材 书目 书 课本'},
+  {tag:'书目', t:'王道系列复习指导 + 408 历年真题（近 5 年起）', d:'辅导主用 + 真题', anchor:'books', kw:'王道 真题 资料 辅导 复习全书'},
+  {tag:'常见', t:'跨考可以：408 全国统考，资料公开，提前补 C 语言', d:'FAQ · 跨考', anchor:'faq', kw:'跨考 非计算机 本科 转专业'},
+  {tag:'常见', t:'湖大 2026 起学院不接收调剂', d:'FAQ · 调剂', anchor:'faq', kw:'调剂 补录'},
+  {tag:'官方', t:'学院官网 csee.hnu.edu.cn / 研究生院 gra.hnu.edu.cn', d:'官方信息源', anchor:'official', kw:'官网 官网 研究生院 学院 电话 邮箱 联系方式'}
+];
+
+/* ===== 站内搜索逻辑 ===== */
+var input = document.getElementById('searchInput');
+var results = document.getElementById('searchResults');
+function runSearch(q){
+  q = (q||'').trim().toLowerCase();
+  if(!q){ results.classList.remove('show'); return; }
+  var hits = SEARCH_DATA.filter(function(it){
+    return it.kw.toLowerCase().indexOf(q) > -1 || it.t.toLowerCase().indexOf(q) > -1 || it.d.toLowerCase().indexOf(q) > -1;
+  });
+  var html = '';
+  if(!hits.length){ html = '<div class="sr-empty">没有找到「'+q+'」，试试：复试线 / 408 / 数据结构 / 机试 / 学费</div>'; }
+  else{
+    hits.slice(0,8).forEach(function(it){
+      html += '<div class="sr-item" data-a="'+it.anchor+'"><span class="tag">'+it.tag+'</span><span class="t">'+it.t+'</span><span class="d">'+it.d+'</span></div>';
+    });
+  }
+  results.innerHTML = html;
+  results.classList.add('show');
+}
+function goToAnchor(anchor){
+  var el = document.getElementById(anchor);
+  if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); }
+  results.classList.remove('show');
+  input.value = '';
+}
+document.getElementById('searchBtn').addEventListener('click', function(){ runSearch(input.value); });
+input.addEventListener('input', function(){ runSearch(input.value); });
+input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ runSearch(input.value); } });
+results.addEventListener('click', function(e){
+  var item = e.target.closest('.sr-item');
+  if(item){ goToAnchor(item.getAttribute('data-a')); }
+});
+document.querySelectorAll('.chip').forEach(function(c){
+  c.addEventListener('click', function(){ input.value = c.getAttribute('data-q'); runSearch(input.value); });
+});
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.search-box')){ results.classList.remove('show'); }
+});
+
+/* ===== 导航 active + 回到顶部 ===== */
+var navLinks = document.querySelectorAll('.nav-links a');
+var sections = {};
+navLinks.forEach(function(a){ sections[a.getAttribute('data-nav')] = document.getElementById(a.getAttribute('data-nav')); });
+var topBtn = document.getElementById('toTop');
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-nav')===en.target.id); });
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+Object.values(sections).forEach(function(s){ if(s) io.observe(s); });
+window.addEventListener('scroll', function(){
+  topBtn.classList.toggle('show', window.scrollY > 600);
+});
+topBtn.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+document.getElementById('menuBtn').addEventListener('click', function(){
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.getElementById('navLinks').addEventListener('click', function(e){
+  if(e.target.tagName==='A'){ this.classList.remove('open'); }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script>
+/* ===== ECharts（含 CDN 失败兜底） ===== */
+function initCharts(){
+  if(typeof echarts === 'undefined') return;
+  var brand = '#9E3B32', gold = '#C9A227', navy = '#1E2C3D', blue = '#2C5A8A', teal = '#3E7C4F';
+
+  var barChart = echarts.init(document.getElementById('barChart'));
+  barChart.setOption({
+    grid:{left:10,right:16,top:28,bottom:8,containLabel:true},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},confine:true},
+    xAxis:{type:'category',data:['信息与通信工程','计算机科学与技术','电子信息（专硕）'],axisLine:{lineStyle:{color:'#C9C2B4'}},axisTick:{show:false},axisLabel:{color:'#5C6672',fontSize:12,interval:0}},
+    yAxis:{type:'value',min:300,max:380,splitLine:{lineStyle:{color:'#EFE9DD'}},axisLabel:{color:'#8A929C',fontSize:11}},
+    series:[{
+      type:'bar',data:[
+        {value:364,itemStyle:{color:blue}},
+        {value:365,itemStyle:{color:brand}},
+        {value:368,itemStyle:{color:gold}}
+      ],
+      barWidth:44,
+      label:{show:true,position:'top',color:'#222A33',fontSize:14,fontWeight:700,fontFamily:'Georgia'}
+    }]
+  });
+
+  var pieChart = echarts.init(document.getElementById('pieChart'));
+  pieChart.setOption({
+    tooltip:{trigger:'item',confine:true,formatter:'{b}：{c} 分（{d}%）'},
+    legend:{bottom:0,itemWidth:12,itemHeight:12,textStyle:{color:'#5C6672',fontSize:12}},
+    series:[{
+      type:'pie',radius:['42%','66%'],center:['50%','44%'],
+      itemStyle:{borderColor:'#fff',borderWidth:3,borderRadius:6},
+      label:{color:'#222A33',fontSize:12,formatter:'{b}\n{c}分'},
+      labelLine:{length:12,length2:8},
+      data:[
+        {value:45,name:'数据结构',itemStyle:{color:navy}},
+        {value:45,name:'组成原理',itemStyle:{color:brand}},
+        {value:35,name:'操作系统',itemStyle:{color:gold}},
+        {value:25,name:'计算机网络',itemStyle:{color:blue}}
+      ]
+    }]
+  });
+
+  function resizeCharts(){ barChart.resize(); pieChart.resize(); }
+  window.addEventListener('resize', resizeCharts);
+  setTimeout(resizeCharts, 300);
+}
+if(typeof echarts !== 'undefined'){ initCharts(); }
+else{
+  var es = document.createElement('script');
+  es.src = 'https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js';
+  es.onload = initCharts;
+  document.head.appendChild(es);
+}
+</script>
+</body>
+</html>
+
+
+
+</body>
+</html>
